@@ -1,7 +1,7 @@
 CFLAGS = -fPIC -c -Wall
 CC = gcc
-LDFLAGS += -shared -Wl
-LIB_INSTALL_DIR = /lib
+LDFLAGS += -shared
+LIB_INSTALL_DIR = /usr/lib
 VIM_PLUGIN_DIR = /usr/share/vim/vim64/plugin
 
 build:

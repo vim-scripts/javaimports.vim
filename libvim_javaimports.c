@@ -2933,7 +2933,7 @@ void appendClass(const char* class){
 
 /**
  * !!library function
- * return all import clausels which are neccessary for the java source
+ * return all import clauses which are neccessary for the java source
  * @param source the java surce as null terminated string
  * @return the neccessary import clausels
  */
@@ -2944,53 +2944,57 @@ char* getImportedClasses(const char* source){
 	int source_size = strlen(source);
 	const char* startpos = NULL;
 	
-	for(i = 0; i < sizeof(classes) / sizeof(char*); i++){
-		class = rfind(classes[i], '.') + 1;
-		class_size = strlen(class);
-		startpos = strstr(source, class);
-		
-		if(startpos){
-			if(startpos + class_size >= source + source_size)
-				continue;
-			if(startpos == source && *(startpos + class_size) == '\t')
-				appendClass(classes[i]);
-			else if(startpos == source && *(startpos + class_size) == '\n')
-				appendClass(classes[i]);
-			else if(startpos == source && *(startpos + class_size) == ' ')
-				appendClass(classes[i]);
-			else if(startpos == source && *(startpos + class_size) == '<')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == '\t' && *(startpos + class_size) == ' ')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == '\t' && *(startpos + class_size) == '<')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == '\t' && *(startpos + class_size) == '\t')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == '\t' && *(startpos + class_size) == '\n')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == '\t' && *(startpos + class_size) == '{')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == ' ' && *(startpos + class_size) == ' ')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == ' ' && *(startpos + class_size) == '<')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == ' ' && *(startpos + class_size) == '\t')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == ' ' && *(startpos + class_size) == '\n')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == ' ' && *(startpos + class_size) == '{')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == '\n' && *(startpos + class_size) == ' ')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == '\n' && *(startpos + class_size) == '<')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == '\n' && *(startpos + class_size) == '\t')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == '\n' && *(startpos + class_size) == '\n')
-				appendClass(classes[i]);
-			else if(*(startpos - 1) == '\n' && *(startpos + class_size) == '{')
-				appendClass(classes[i]);
+	if(source){
+		for(i = 0; i < sizeof(classes) / sizeof(char*); i++){
+			class = rfind(classes[i], '.') + 1;
+			class_size = strlen(class);
+			startpos = strstr(source, class);
+			
+			if(startpos){
+				if(startpos + class_size >= source + source_size)
+					continue;
+				if(startpos == source && *(startpos + class_size) == '\t')
+					appendClass(classes[i]);
+				else if(startpos == source && *(startpos + class_size) == '\n')
+					appendClass(classes[i]);
+				else if(startpos == source && *(startpos + class_size) == ' ')
+					appendClass(classes[i]);
+				else if(startpos == source && *(startpos + class_size) == '<')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == '\t' && *(startpos + class_size) == ' ')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == '\t' && *(startpos + class_size) == '<')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == '\t' && *(startpos + class_size) == '\t')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == '\t' && *(startpos + class_size) == '\n')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == '\t' && *(startpos + class_size) == '{')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == ' ' && *(startpos + class_size) == ' ')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == ' ' && *(startpos + class_size) == '<')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == ' ' && *(startpos + class_size) == '\t')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == ' ' && *(startpos + class_size) == '\n')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == ' ' && *(startpos + class_size) == '{')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == '\n' && *(startpos + class_size) == ' ')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == '\n' && *(startpos + class_size) == '<')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == '\n' && *(startpos + class_size) == '\t')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == '\n' && *(startpos + class_size) == '\n')
+					appendClass(classes[i]);
+				else if(*(startpos - 1) == '\n' && *(startpos + class_size) == '{')
+					appendClass(classes[i]);
+			}
 		}
+		return wantedClasses;
 	}
-	return wantedClasses;
+	else 
+		return "";
 }
