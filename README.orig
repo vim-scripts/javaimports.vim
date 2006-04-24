@@ -1,0 +1,9 @@
+1.) Type "make" to compile the plugin
+2.) Type "make install" as root to install it
+3.) Open vim and edit your java source file 
+    then hit Ctrl-i to import all neccessary classes
+
+If you want customize installation directories take 
+a look at the Makefile.
+
+Enjoy

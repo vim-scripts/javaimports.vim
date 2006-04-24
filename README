@@ -1,0 +1,9 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=1526
+
+This plugin let you write your java application in vim, 
+without taking care about import clauses. Just press `ii (` == backticks)
+to insert all neccessary imports.
+
+Only for GNU Linux OS.
+
+
