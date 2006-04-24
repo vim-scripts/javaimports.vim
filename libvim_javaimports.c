@@ -2968,6 +2968,8 @@ char* getImportedClasses(const char* source){
 				appendClass(classes[i]);
 			else if(*(startpos - 1) == '\t' && *(startpos + class_size) == '\n')
 				appendClass(classes[i]);
+			else if(*(startpos - 1) == '\t' && *(startpos + class_size) == '{')
+				appendClass(classes[i]);
 			else if(*(startpos - 1) == ' ' && *(startpos + class_size) == ' ')
 				appendClass(classes[i]);
 			else if(*(startpos - 1) == ' ' && *(startpos + class_size) == '<')
@@ -2976,6 +2978,8 @@ char* getImportedClasses(const char* source){
 				appendClass(classes[i]);
 			else if(*(startpos - 1) == ' ' && *(startpos + class_size) == '\n')
 				appendClass(classes[i]);
+			else if(*(startpos - 1) == ' ' && *(startpos + class_size) == '{')
+				appendClass(classes[i]);
 			else if(*(startpos - 1) == '\n' && *(startpos + class_size) == ' ')
 				appendClass(classes[i]);
 			else if(*(startpos - 1) == '\n' && *(startpos + class_size) == '<')
@@ -2983,6 +2987,8 @@ char* getImportedClasses(const char* source){
 			else if(*(startpos - 1) == '\n' && *(startpos + class_size) == '\t')
 				appendClass(classes[i]);
 			else if(*(startpos - 1) == '\n' && *(startpos + class_size) == '\n')
+				appendClass(classes[i]);
+			else if(*(startpos - 1) == '\n' && *(startpos + class_size) == '{')
 				appendClass(classes[i]);
 		}
 	}

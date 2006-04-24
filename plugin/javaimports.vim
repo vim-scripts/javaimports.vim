@@ -6,4 +6,7 @@ fun Paste_imported_classes(file_content)
 	:0put! =imports
 endf
 
-map <c-i> <esc>ggyGgg:call Paste_imported_classes(getreg())<cr>
+if expand('%:e') ==# "java"
+	map `ii <esc>ggyGgg:call Paste_imported_classes(getreg())<cr>
+	imap `ii <esc>ggyGgg:call Paste_imported_classes(getreg())<cr>i
+endif
