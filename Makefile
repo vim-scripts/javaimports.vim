@@ -1,8 +1,7 @@
 CFLAGS = -fPIC -c -Wall
 CC = gcc
 LDFLAGS += -shared
-LIB_INSTALL_DIR = /usr/lib
-VIM_PLUGIN_DIR = /usr/share/vim/vim64/plugin
+VIM_PLUGIN_DIR = $$HOME/.vim/plugin
 
 build:
 	$(MAKE) libvim_javaimports.so
@@ -12,11 +11,14 @@ libvim_javaimports.so: libvim_javaimports.o
 
 install: 
 	$(MAKE) libvim_javaimports.so
+	if ! test -d $(VIM_PLUGIN_DIR); then\
+		mkdir -p $(VIM_PLUGIN_DIR);\
+	fi
 	cp javaimports.vim $(VIM_PLUGIN_DIR)
-	cp libvim_javaimports.so $(LIB_INSTALL_DIR)
+	cp libvim_javaimports.so $(VIM_PLUGIN_DIR)
 
 uninstall:
 	rm -f $(VIM_PLUGIN_DIR)/javaimports.vim 
-	rm -f $(LIB_INSTALL_DIR)/libvim_javaimports.so
+	rm -f $(VIM_PLUGIN_DIR)/libvim_javaimports.so
 clean:
 	rm -f *.so *.o 
