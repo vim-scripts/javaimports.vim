@@ -48,7 +48,7 @@ fun JavaImports_Del_ambigous_imports(buffer)
 						let tmp_str = strpart(tmp_str, end_pos + 1)
 						let end_pos = stridx(tmp_str, "[")
 						if user_in !=# numbers
-							:call setbufvar(a:buffer, numbers, "0")
+							call setbufvar(a:buffer, numbers, "0")
 						endif
 					endw
 					break
@@ -80,12 +80,12 @@ fun JavaImports_Fill_buffer(imports, buffer)
 	let end_pos = stridx(imports, "\n")
 	while end_pos > 0
 		let claus = strpart(imports, 0, end_pos)
-		:call setbufvar(a:buffer, counter, claus)
+		call setbufvar(a:buffer, counter, claus)
 		let imports = strpart(imports, end_pos + 1)
 		let counter = counter + 1
 		let end_pos = stridx(imports, "\n")
 	endw
-	:call setbufvar(a:buffer, counter, -1)
+	call setbufvar(a:buffer, counter, -1)
 endf
 
 fun JavaImports_Insert_imported_classes(file_content)
@@ -94,14 +94,12 @@ fun JavaImports_Insert_imported_classes(file_content)
 	let function_name = "getImportedClasses"
 	let imports = libcall(libdir . libname, function_name, a:file_content)
 	if imports !=# ""
-		:call JavaImports_Fill_buffer(imports, "r")
-		:call JavaImports_Del_ambigous_imports("r")
+		call JavaImports_Fill_buffer(imports, "r")
+		call JavaImports_Del_ambigous_imports("r")
 		let paste_content = JavaImports_Get_paste_content("r")
-		:0put! =paste_content
+		0put! =paste_content
 	endif
 endf
 
-if expand('%:e') ==# "java"
-	map `ii <esc>ggyGgg:call JavaImports_Insert_imported_classes(getreg())<cr>
-	imap `ii <esc>ggyGgg:call JavaImports_Insert_imported_classes(getreg())<cr>i
-endif
+au FileType java map `ii <esc>ggyGgg:call JavaImports_Insert_imported_classes(getreg())<cr>
+au FileType	java imap `ii <esc>ggyGgg:call JavaImports_Insert_imported_classes(getreg())<cr>i
